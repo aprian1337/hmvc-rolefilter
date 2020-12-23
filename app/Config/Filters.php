@@ -10,15 +10,26 @@ class Filters extends BaseConfig
 		'csrf'     => \CodeIgniter\Filters\CSRF::class,
 		'toolbar'  => \CodeIgniter\Filters\DebugToolbar::class,
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
+		'rolefilter' => \App\Filters\RoleFilter::class,
 	];
 
 	// Always applied before every request
 	public $globals = [
 		'before' => [
+			'rolefilter'=>[
+				'except' => [
+					'/',
+					'auth/*'
+				]
+			]
 			//'honeypot'
 			// 'csrf',
 		],
 		'after'  => [
+			'rolefilter'=> [
+				'except' => [
+				]
+			],
 			'toolbar',
 			//'honeypot'
 		],
